@@ -21,6 +21,11 @@ class AuthRepository {
 
   /// Emits on login, logout and app start. Firebase persists the session to
   /// disk itself, so a returning user is restored here without extra storage.
+  ///
+  /// Deliberately `authStateChanges()` and not `userChanges()`. Both fire on
+  /// sign-up before the display name is set, but `userChanges()` then fires
+  /// *again* for the profile edit carrying the SDK's still-stale profile, which
+  /// overwrites the correct user AuthBloc gets back from [signUp].
   Stream<AppUser?> get authStateChanges =>
       _auth.authStateChanges().map(_mapUser);
 
@@ -53,11 +58,22 @@ class AuthRepository {
         email: email.trim(),
         password: password,
       );
-      await credential.user?.updateDisplayName(name.trim());
-      await credential.user?.reload();
-      final user = _mapUser(_auth.currentUser);
-      if (user == null) throw const AuthException('Could not create account.');
-      return user;
+      final created = credential.user;
+      if (created == null) {
+        throw const AuthException('Could not create account.');
+      }
+      await created.updateDisplayName(name.trim());
+
+      // Build the result from the name we just set rather than re-reading it.
+      // updateDisplayName resolves before the profile is readable back, so an
+      // immediate reload() still returns displayName == null and the rider ends
+      // up greeted by their email handle until the next sign-in. The value is
+      // already known here, so there is nothing to fetch.
+      return AppUser(
+        uid: created.uid,
+        email: created.email ?? email.trim(),
+        displayName: name.trim(),
+      );
     } on FirebaseAuthException catch (e) {
       throw AuthException(_messageFor(e));
     }

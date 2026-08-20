@@ -42,5 +42,16 @@ class AuthState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, user?.uid, isSubmitting, errorMessage];
+  // Compare the whole profile, not just user?.uid. Keying on the uid alone
+  // made a state carrying the same account with a newly-set display name
+  // compare equal to the previous one, so bloc dropped the emission and the
+  // greeting kept showing the email handle after sign-up.
+  List<Object?> get props => [
+        status,
+        user?.uid,
+        user?.email,
+        user?.displayName,
+        isSubmitting,
+        errorMessage,
+      ];
 }
