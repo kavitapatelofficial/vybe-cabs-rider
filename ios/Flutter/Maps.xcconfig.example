@@ -1,0 +1,3 @@
+// Copy to Maps.xcconfig and paste your Maps SDK for iOS key.
+// Maps.xcconfig is git-ignored so the key never reaches the repo.
+MAPS_API_KEY = AIzaSyExampleKeyReplaceMe

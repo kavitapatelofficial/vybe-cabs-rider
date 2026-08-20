@@ -42,8 +42,18 @@ MAPS_API_KEY=AIza...your-key
 ```
 
 `android/app/build.gradle.kts` reads it and injects it into the manifest as a
-placeholder, so the key never enters version control. For iOS, replace
-`REPLACE_ME_IOS_MAPS_API_KEY` in `ios/Runner/AppDelegate.swift`.
+placeholder, so the key never enters version control.
+
+iOS works the same way. Copy the example config and add the key there:
+
+```bash
+cp ios/Flutter/Maps.xcconfig.example ios/Flutter/Maps.xcconfig
+```
+
+`Maps.xcconfig` is git-ignored; the build feeds `MAPS_API_KEY` through
+`Info.plist`, and `AppDelegate` reads it at launch. Enable **Maps SDK for
+Android** and **Maps SDK for iOS** on the key for the respective platforms.
+With no key the app still runs — the map view is just blank.
 
 ### 3. Run
 

@@ -8,9 +8,16 @@ import UIKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    // Replace with your iOS Google Maps SDK key before running on iOS.
-    // Android reads its key from android/local.properties instead.
-    GMSServices.provideAPIKey("REPLACE_ME_IOS_MAPS_API_KEY")
+    // Key comes from ios/Flutter/Maps.xcconfig (git-ignored) via Info.plist,
+    // mirroring how Android reads its key from android/local.properties.
+    // Left unset the app still runs; the map view is simply blank.
+    if let key = Bundle.main.object(forInfoDictionaryKey: "MapsApiKey") as? String,
+       !key.isEmpty {
+      GMSServices.provideAPIKey(key)
+    } else {
+      NSLog("[VybeCabs] No Maps key found. Copy ios/Flutter/Maps.xcconfig.example "
+            + "to Maps.xcconfig and add your Maps SDK for iOS key.")
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
