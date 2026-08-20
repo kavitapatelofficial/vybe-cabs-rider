@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matches AppTheme.background in lib/core/theme/app_theme.dart, so the
+         native launch window hands off to the Flutter splash with no flash. -->
+    <color name="vybe_background">#FF0B0B12</color>
+</resources>

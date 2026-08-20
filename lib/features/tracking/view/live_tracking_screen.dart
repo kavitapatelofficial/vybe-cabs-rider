@@ -119,10 +119,9 @@ class _LiveTrackingViewState extends State<_LiveTrackingView> {
             onPressed: () {
               Navigator.of(dialogContext).pop();
               context.read<TrackingBloc>().add(const TrackingCancelled());
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                AppRoutes.home,
-                (route) => false,
-              );
+              Navigator.of(
+                context,
+              ).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
             },
             style: TextButton.styleFrom(foregroundColor: AppTheme.danger),
             child: const Text('Cancel ride'),
@@ -195,9 +194,17 @@ class _LiveTrackingViewState extends State<_LiveTrackingView> {
   }
 
   Widget _buildMap(TrackingState state) {
-    final initial =
-        state.carPosition ??
-        widget.args.pickup.position;
+    final initial = state.carPosition ?? widget.args.pickup.position;
+
+    // Google paints a light placeholder while tiles load, which flashes white
+    // against this dark UI. Hold the map back until the dark style is ready and
+    // keep a dark ground underneath it.
+    if (_mapStyle == null) {
+      return const ColoredBox(
+        color: AppTheme.background,
+        child: SizedBox.expand(),
+      );
+    }
 
     return GoogleMap(
       initialCameraPosition: CameraPosition(target: initial, zoom: 15.5),
@@ -301,68 +308,75 @@ class _LiveTrackingViewState extends State<_LiveTrackingView> {
   Widget _buildStatusBanner(TrackingState state) {
     final isArrived = state.phase == TrackingPhase.driverArrived;
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 350),
-          child: Container(
-            key: ValueKey(state.phase),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: BoxDecoration(
-              color: (isArrived ? AppTheme.success : AppTheme.surface)
-                  .withValues(alpha: isArrived ? 0.95 : 0.94),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: AppTheme.outline),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: 20,
-                  offset: Offset(0, 6),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  isArrived
-                      ? Icons.check_circle_rounded
-                      : Icons.directions_car_rounded,
-                  color: isArrived ? Colors.white : AppTheme.violet,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        state.headline,
-                        style: TextStyle(
-                          fontSize: 15.5,
-                          fontWeight: FontWeight.w800,
-                          color: isArrived
-                              ? Colors.white
-                              : AppTheme.textPrimary,
-                        ),
-                      ),
-                      if (state.subline.isNotEmpty) ...[
-                        const SizedBox(height: 2),
+    // Pinned to the top and sized to its content. Without the Align the banner
+    // stretched down over the whole map — unnoticed while it was dark surface,
+    // but a wall of green once the driver arrived.
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 350),
+            child: Container(
+              key: ValueKey(state.phase),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                color: (isArrived ? AppTheme.success : AppTheme.surface)
+                    .withValues(alpha: isArrived ? 0.95 : 0.94),
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: AppTheme.outline),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black45,
+                    blurRadius: 20,
+                    offset: Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    isArrived
+                        ? Icons.check_circle_rounded
+                        : Icons.directions_car_rounded,
+                    color: isArrived ? Colors.white : AppTheme.violet,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
-                          state.subline,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          state.headline,
                           style: TextStyle(
-                            fontSize: 12.5,
+                            fontSize: 15.5,
+                            fontWeight: FontWeight.w800,
                             color: isArrived
-                                ? Colors.white70
-                                : AppTheme.textSecondary,
+                                ? Colors.white
+                                : AppTheme.textPrimary,
                           ),
                         ),
+                        if (state.subline.isNotEmpty) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            state.subline,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              color: isArrived
+                                  ? Colors.white70
+                                  : AppTheme.textSecondary,
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -380,9 +394,7 @@ class _RecenterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppTheme.surface,
-      shape: const CircleBorder(
-        side: BorderSide(color: AppTheme.outline),
-      ),
+      shape: const CircleBorder(side: BorderSide(color: AppTheme.outline)),
       elevation: 6,
       child: InkWell(
         customBorder: const CircleBorder(),

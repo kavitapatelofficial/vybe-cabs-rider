@@ -80,9 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (destination == null) {
       final position = state.riderPosition;
       if (position == null) return;
-      await controller.animateCamera(
-        CameraUpdate.newLatLngZoom(position, 15),
-      );
+      await controller.animateCamera(CameraUpdate.newLatLngZoom(position, 15));
       return;
     }
 
@@ -180,6 +178,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildMap(BookingState state) {
     final center = state.riderPosition ?? const LatLng(12.9756, 77.6068);
 
+    // Same reason as the tracking map: avoid the light tile placeholder
+    // flashing before the dark style lands.
+    if (_mapStyle == null) {
+      return const ColoredBox(
+        color: AppTheme.background,
+        child: SizedBox.expand(),
+      );
+    }
+
     return GoogleMap(
       initialCameraPosition: CameraPosition(target: center, zoom: 15),
       style: _mapStyle,
@@ -226,10 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
           position: destination.position,
           icon: _dropIcon ?? BitmapDescriptor.defaultMarker,
           anchor: const Offset(0.5, 0.5),
-          infoWindow: InfoWindow(
-            title: 'Drop',
-            snippet: destination.name,
-          ),
+          infoWindow: InfoWindow(title: 'Drop', snippet: destination.name),
         ),
       );
     }
@@ -355,7 +359,11 @@ class _GlassCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppTheme.outline),
         boxShadow: const [
-          BoxShadow(color: Colors.black45, blurRadius: 18, offset: Offset(0, 6)),
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 18,
+            offset: Offset(0, 6),
+          ),
         ],
       ),
       child: child,

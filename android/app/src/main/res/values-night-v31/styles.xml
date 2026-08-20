@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 12+ draws its own splash and ignores windowBackground, falling
+         back to the launcher icon — which is still Flutter's default. Point it
+         at the app mark and the app background instead. -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowSplashScreenBackground">@color/vybe_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/vybe_logo</item>
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@color/vybe_background</item>
+    </style>
+</resources>

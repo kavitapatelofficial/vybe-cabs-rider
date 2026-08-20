@@ -58,3 +58,6 @@ vybe_cabs_demo.mp4
 
 # Local IDE settings
 .vscode/
+
+# Built APKs — share outside the repo, they embed the Maps key.
+apk/
