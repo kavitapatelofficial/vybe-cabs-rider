@@ -52,3 +52,9 @@ app.*.map.json
 **/ios/Runner/GoogleService-Info.plist
 **/macos/Runner/GoogleService-Info.plist
 **/ios/Flutter/Maps.xcconfig
+
+# Demo recording — large binary, share it outside the repo.
+vybe_cabs_demo.mp4
+
+# Local IDE settings
+.vscode/

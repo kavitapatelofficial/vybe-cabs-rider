@@ -143,7 +143,16 @@ class _HomeScreenState extends State<HomeScreen> {
             return Stack(
               children: [
                 _buildMap(state),
-                _buildTopBar(state),
+                // Scoped to the greeting name so the bar only rebuilds when
+                // that changes. It has to be a widget rather than a
+                // `context.select` inside _buildTopBar: that call would run
+                // against this State's context, which is not the element
+                // being built here.
+                BlocSelector<AuthBloc, AuthState, String>(
+                  selector: (authState) =>
+                      authState.user?.greetingName ?? 'there',
+                  builder: (context, name) => _buildTopBar(state, name),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: BookingPanel(
@@ -243,11 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
     };
   }
 
-  Widget _buildTopBar(BookingState state) {
-    final name = context.select<AuthBloc, String>(
-      (bloc) => bloc.state.user?.greetingName ?? 'there',
-    );
-
+  Widget _buildTopBar(BookingState state, String name) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),

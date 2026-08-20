@@ -39,22 +39,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REPLACE_ME_ANDROID_API_KEY',
-    appId: 'REPLACE_ME_ANDROID_APP_ID',
-    messagingSenderId: 'REPLACE_ME_SENDER_ID',
-    projectId: 'REPLACE_ME_PROJECT_ID',
-    storageBucket: 'REPLACE_ME_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyAIcQ3H2HDAG84TjX3nuAv50jnDzz15Vdk',
+    appId: '1:514007794763:android:2513a29c51016ec3b239ce',
+    messagingSenderId: '514007794763',
+    projectId: 'vybe-cabs-rider',
+    storageBucket: 'vybe-cabs-rider.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'REPLACE_ME_IOS_API_KEY',
-    appId: 'REPLACE_ME_IOS_APP_ID',
-    messagingSenderId: 'REPLACE_ME_SENDER_ID',
-    projectId: 'REPLACE_ME_PROJECT_ID',
-    storageBucket: 'REPLACE_ME_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyDHaiNnY_yppT7ZsBIlCi-vqz8PoiqOiRU',
+    appId: '1:514007794763:ios:12f0d34d51d48430b239ce',
+    messagingSenderId: '514007794763',
+    projectId: 'vybe-cabs-rider',
+    storageBucket: 'vybe-cabs-rider.firebasestorage.app',
     iosBundleId: 'com.vybecabs.rider',
   );
-
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'REPLACE_ME_WEB_API_KEY',
     appId: 'REPLACE_ME_WEB_APP_ID',
