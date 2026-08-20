@@ -1,0 +1,78 @@
+[
+  {
+    "id": "drv_001",
+    "name": "Ramesh Kumar",
+    "photoUrl": "",
+    "carModel": "Maruti Suzuki Dzire",
+    "carColor": "White",
+    "carNumber": "KA 05 MH 4721",
+    "rating": 4.8,
+    "totalTrips": 3421,
+    "phone": "+91 98450 11223",
+    "approachWaypoints": [
+      [12.9832, 77.6141],
+      [12.9821, 77.6118],
+      [12.9805, 77.6099],
+      [12.9788, 77.6086],
+      [12.9772, 77.6076],
+      [12.9756, 77.6068]
+    ]
+  },
+  {
+    "id": "drv_002",
+    "name": "Suresh Naik",
+    "photoUrl": "",
+    "carModel": "Hyundai Aura",
+    "carColor": "Silver",
+    "carNumber": "KA 01 AB 9832",
+    "rating": 4.6,
+    "totalTrips": 1897,
+    "phone": "+91 99012 44556",
+    "approachWaypoints": [
+      [12.9690, 77.6012],
+      [12.9708, 77.6024],
+      [12.9724, 77.6039],
+      [12.9738, 77.6051],
+      [12.9748, 77.6061],
+      [12.9756, 77.6068]
+    ]
+  },
+  {
+    "id": "drv_003",
+    "name": "Imran Shaikh",
+    "photoUrl": "",
+    "carModel": "Toyota Etios",
+    "carColor": "Grey",
+    "carNumber": "KA 03 MJ 1055",
+    "rating": 4.9,
+    "totalTrips": 5210,
+    "phone": "+91 97414 78900",
+    "approachWaypoints": [
+      [12.9781, 77.5981],
+      [12.9776, 77.6002],
+      [12.9769, 77.6024],
+      [12.9764, 77.6042],
+      [12.9760, 77.6056],
+      [12.9756, 77.6068]
+    ]
+  },
+  {
+    "id": "drv_004",
+    "name": "Anil Deshpande",
+    "photoUrl": "",
+    "carModel": "Tata Tigor EV",
+    "carColor": "Blue",
+    "carNumber": "KA 51 AE 3388",
+    "rating": 4.7,
+    "totalTrips": 2764,
+    "phone": "+91 88849 20117",
+    "approachWaypoints": [
+      [12.9712, 77.6155],
+      [12.9724, 77.6132],
+      [12.9736, 77.6112],
+      [12.9744, 77.6094],
+      [12.9751, 77.6080],
+      [12.9756, 77.6068]
+    ]
+  }
+]

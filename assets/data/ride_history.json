@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ride_1041",
+    "dateIso": "2026-08-18T09:12:00",
+    "pickup": "MG Road Metro Station",
+    "drop": "Kempegowda International Airport",
+    "fare": 812.0,
+    "distanceKm": 34.5,
+    "status": "completed",
+    "driverName": "Ramesh Kumar",
+    "carNumber": "KA 05 MH 4721",
+    "rating": 5
+  },
+  {
+    "id": "ride_1038",
+    "dateIso": "2026-08-15T19:44:00",
+    "pickup": "Indiranagar 100 Feet Road",
+    "drop": "Koramangala 5th Block",
+    "fare": 148.0,
+    "distanceKm": 6.1,
+    "status": "completed",
+    "driverName": "Suresh Naik",
+    "carNumber": "KA 01 AB 9832",
+    "rating": 4
+  },
+  {
+    "id": "ride_1033",
+    "dateIso": "2026-08-11T08:05:00",
+    "pickup": "HSR Layout Sector 2",
+    "drop": "ITPL, Whitefield",
+    "fare": 396.0,
+    "distanceKm": 19.7,
+    "status": "completed",
+    "driverName": "Imran Shaikh",
+    "carNumber": "KA 03 MJ 1055",
+    "rating": 5
+  },
+  {
+    "id": "ride_1029",
+    "dateIso": "2026-08-07T21:30:00",
+    "pickup": "Phoenix Mall of Asia",
+    "drop": "MG Road Metro Station",
+    "fare": 274.0,
+    "distanceKm": 12.9,
+    "status": "cancelled",
+    "driverName": "Anil Deshpande",
+    "carNumber": "KA 51 AE 3388",
+    "rating": 0
+  },
+  {
+    "id": "ride_1024",
+    "dateIso": "2026-08-02T13:18:00",
+    "pickup": "Jayanagar 4th Block",
+    "drop": "Indiranagar 100 Feet Road",
+    "fare": 205.0,
+    "distanceKm": 9.4,
+    "status": "completed",
+    "driverName": "Ramesh Kumar",
+    "carNumber": "KA 05 MH 4721",
+    "rating": 4
+  },
+  {
+    "id": "ride_1019",
+    "dateIso": "2026-07-28T07:02:00",
+    "pickup": "Koramangala 5th Block",
+    "drop": "Kempegowda International Airport",
+    "fare": 934.0,
+    "distanceKm": 39.8,
+    "status": "completed",
+    "driverName": "Imran Shaikh",
+    "carNumber": "KA 03 MJ 1055",
+    "rating": 5
+  }
+]
